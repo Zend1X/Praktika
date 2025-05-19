@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROT13 Русский</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h2>Исходный текст</h2>
+            <textarea id="inputText" rows="10" cols="50"></textarea>
+            <button id="processBtn">Шифровать/Дешифровать</button>
+        </div>
+        <div class="output-section">
+            <h2>Результат</h2>
+            <textarea id="outputText" rows="10" cols="50" readonly></textarea>
+        </div>
+    </div>
+    <div class="info">
+        <h3>Алфавит:</h3>
+        <p id="alphabet"></p>
+        <h3>Операция:</h3>
+        <p id="operation"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
