@@ -4,10 +4,8 @@ const alphabet = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 ];
-
 const alphabetInfo = document.getElementById('alphabetInfo');
 alphabetInfo.innerHTML = `<h3>Алфавит: </h3><p>${alphabet.join(' ')}</p>`;
-
 function transformText(text, shift) {
     let result = '';
     for (let i = 0; i < text.length; i++) {
@@ -23,7 +21,6 @@ function transformText(text, shift) {
     }
     return result;
 }
-
 document.getElementById('encryptBtn').addEventListener('click', function() {
     const inputText = document.getElementById('inputText').value;
     const outputText = document.getElementById('outputText');
@@ -36,7 +33,6 @@ document.getElementById('encryptBtn').addEventListener('click', function() {
         <hr>
     `;
 });
-
 document.getElementById('decryptBtn').addEventListener('click', function() {
     const inputText = document.getElementById('inputText').value;
     const outputText = document.getElementById('outputText');
