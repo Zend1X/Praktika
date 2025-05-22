@@ -1,56 +1,51 @@
-    const englishAlphabet = [
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-    ];
-    const alphabetLength = 26; 
-    const rotShift = 13;
-    
-    document.getElementById('alphabet').textContent = englishAlphabet.join(' ');
-    
-    document.getElementById('processBtn').addEventListener('click', function() {
-        const inputText = document.getElementById('inputText').value;
-        let outputText = '';
-        let operation = '';
-        
-        const isEncrypt = inputText.length % 2 === 0;
-        operation = isEncrypt ? 'Encryption ROT13' : 'Decryption ROT13';
-        document.getElementById('operation').textContent = operation;
-        
-        for (let i = 0; i < inputText.length; i++) {
-            const char = inputText[i];
-            let foundIndex = -1;
-            
-            for (let j = 0; j < englishAlphabet.length; j++) {
-                if (englishAlphabet[j] === char) {
-                    foundIndex = j;
-                    break;
-                }
-            }
-            
-            if (foundIndex >= 0) {
-                let newIndex;
-                if (isEncrypt) {
-                    newIndex = (foundIndex + rotShift) % alphabetLength;
-                    if (foundIndex >= alphabetLength) {
-                        newIndex += alphabetLength;
-                    }
-                } else {
-                    newIndex = (foundIndex - rotShift) % alphabetLength;
-                    if (newIndex < 0) {
-                        newIndex += alphabetLength;
-                    }
-                    if (foundIndex >= alphabetLength) {
-                        newIndex += alphabetLength;
-                    }
-                }
-                
-                outputText += englishAlphabet[newIndex];
-            } else {
-                outputText += char;
-            }
+const alphabet = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+];
+
+const alphabetInfo = document.getElementById('alphabetInfo');
+alphabetInfo.innerHTML = `<h3>Алфавит: </h3><p>${alphabet.join(' ')}</p>`;
+
+function transformText(text, shift) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        let index = alphabet.indexOf(char);
+        if (index !== -1) {
+            const offset = index < 26 ? 0 : 26;
+            let newIndex = (index - offset + shift + 26) % 26 + offset;
+            result += alphabet[newIndex];
+        } else {
+            result += char;
         }
-        
-        document.getElementById('outputText').value = outputText;
-    });
+    }
+    return result;
+}
+
+document.getElementById('encryptBtn').addEventListener('click', function() {
+    const inputText = document.getElementById('inputText').value;
+    const outputText = document.getElementById('outputText');
+    const result = transformText(inputText, 13);
+    outputText.innerHTML = result.replace(/\n/g, '<br>');
+    alphabetInfo.innerHTML += `
+        <p>Операция: Зашифровка</p>
+        <p>Исходный текст: ${inputText.replace(/\n/g, '<br>')}</p>
+        <p>Итог: ${result.replace(/\n/g, '<br>')}</p>
+        <hr>
+    `;
+});
+
+document.getElementById('decryptBtn').addEventListener('click', function() {
+    const inputText = document.getElementById('inputText').value;
+    const outputText = document.getElementById('outputText');
+    const result = transformText(inputText, -13);
+    outputText.innerHTML = result.replace(/\n/g, '<br>');
+    alphabetInfo.innerHTML += `
+        <p>Операция: Расшифровка</p>
+        <p>Исходный текст: ${inputText.replace(/\n/g, '<br>')}</p>
+        <p>Итог: ${result.replace(/\n/g, '<br>')}</p>
+        <hr>
+    `;
+});

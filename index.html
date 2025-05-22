@@ -1,29 +1,42 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROT13 Русский</title>
-    <link rel="stylesheet" href="/Z1/css/main.css">
+    <title>ROT13 Шифратор</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <header>
+        <h1>ROT13 Шифратор/Дешифратор</h1>
+        <p>Простой инструмент для кодирования и декодирования текста</p>
+    </header>
+
     <div class="container">
-        <div class="input-section">
+        <div class="input-column">
             <h2>Исходный текст</h2>
-            <textarea id="inputText" rows="10" cols="50"></textarea>
-            <button id="processBtn">Шифровать/Дешифровать</button>
+            <textarea id="inputText" rows="10" placeholder="Введите текст здесь..."></textarea>
+            <div class="buttons">
+                <button id="encryptBtn">Зашифровать (+13)</button>
+                <button id="decryptBtn">Расшифровать (-13)</button>
+            </div>
         </div>
-        <div class="output-section">
+        <div class="output-column">
             <h2>Результат</h2>
-            <textarea id="outputText" rows="10" cols="50" readonly></textarea>
+            <div id="outputText"></div>
         </div>
     </div>
-    <div class="info">
-        <h3>Алфавит:</h3>
-        <p id="alphabet"></p>
-        <h3>Операция:</h3>
-        <p id="operation"></p>
+
+    <div id="infoPanel">
+        <h3>Информация</h3>
+        <div id="alphabetInfo"></div>
+        <div id="operationInfo"></div>
     </div>
+
+    <footer>
+        <p>© 2025 ROT13 Шифратор | Алгоритм ROT13</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
